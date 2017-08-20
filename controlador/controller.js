@@ -223,6 +223,7 @@ function validaCombobox(){
 
 function refreshTable(){
     
+    //TOTALIZACION
     $.ajax({
         url: "../modelo/queryJson.php?qry=5",
         type: "Get",
@@ -250,6 +251,7 @@ function refreshTable(){
             error: function (msg) { alert(msg); }
     });
     
+    //LISTADO DE VOTOS
     $.ajax({
         url: "../modelo/queryJson.php?qry=6",
         type: "Get",
@@ -257,17 +259,11 @@ function refreshTable(){
             try{
                 var content = JSON.parse(data);
                 var total = 0;
-                $('#listVotos')
-                        .append("<li type='disc'>"+content[i].name</li>");
+                
 
                 for (i in content){
-                    $('#tableTotalizacion')
-                        .append("<tr><td>"+content[i].namecandidate+"</td><td>"+content[i].cuenta+"</td></tr>");
-                    total += parseInt(content[i].cuenta);
+                    $('#listVotos').append("<li type='disc' value='"+content[i].rut+"'>"+content[i].rut+"---"+content[i].name+", "+content[i].namecandidate+", "+content[i].date+" "+content[i].time+" <a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a></li>");
                 }
-                $('#tableTotalizacion')
-                        .append("<tr><td>Total Votos</td><td>"+total+"</td></tr>");
-
 
             }catch(err){
                 console.log(err);
@@ -279,7 +275,9 @@ function refreshTable(){
 }
 
 }); 
-
+function eliminaVoto(rut){
+    alert(rut);
+}
 function formateCheckbox(value){
     if(value == 't'){
         return true;
