@@ -223,30 +223,58 @@ function validaCombobox(){
 
 function refreshTable(){
     
-        $.ajax({
+    $.ajax({
         url: "../modelo/queryJson.php?qry=5",
         type: "Get",
         success: function (data) { 
             try{
                 var content = JSON.parse(data);
-                
+                var total = 0;
                 $('#tableTotalizacion')
                         .append("<tr><td colspan=2>Total de votaciones</td></tr><tr><td>Nombre candidato</td><td># de votos</td></tr>");
-                
-                fo
-                /*
-                $("#candidate").empty();
-                $("#candidate").append("<option value=0></option>");
-                for (var i = content.length - 1; i >= 0; i--) {
-                    
-                    $("#candidate").append("<option value=" + content[i].id_candidate + ">" + content[i].namecandidate + "</option>");
-                }*/
+
+                for (i in content){
+                    $('#tableTotalizacion')
+                        .append("<tr><td>"+content[i].namecandidate+"</td><td>"+content[i].cuenta+"</td></tr>");
+                    total += parseInt(content[i].cuenta);
+                }
+                $('#tableTotalizacion')
+                        .append("<tr><td>Total Votos</td><td>"+total+"</td></tr>");
+
+
             }catch(err){
                 console.log(err);
             }
-            
+
         },
-        error: function (msg) { alert(msg); }
+            error: function (msg) { alert(msg); }
+    });
+    
+    $.ajax({
+        url: "../modelo/queryJson.php?qry=6",
+        type: "Get",
+        success: function (data) { 
+            try{
+                var content = JSON.parse(data);
+                var total = 0;
+                $('#listVotos')
+                        .append("<li type='disc'>"+content[i].name</li>");
+
+                for (i in content){
+                    $('#tableTotalizacion')
+                        .append("<tr><td>"+content[i].namecandidate+"</td><td>"+content[i].cuenta+"</td></tr>");
+                    total += parseInt(content[i].cuenta);
+                }
+                $('#tableTotalizacion')
+                        .append("<tr><td>Total Votos</td><td>"+total+"</td></tr>");
+
+
+            }catch(err){
+                console.log(err);
+            }
+
+        },
+            error: function (msg) { alert(msg); }
     });
 }
 

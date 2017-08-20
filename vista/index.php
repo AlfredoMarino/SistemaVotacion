@@ -91,6 +91,10 @@
 		<tr>
 			<td colspan="2">
 				<h3 align="CENTER">LISTADO DE VOTOS EMITIDOS</h3>
+                                <ul id="listVotos">
+                                    
+                                    
+                                </ul>
 			</td>
 			
 		</tr>

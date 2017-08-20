@@ -34,6 +34,11 @@
                 case 5:
                     $consulta = "SELECT * FROM totalizador;";        
                 break;
+            
+                //Lista de votos
+                case 6:
+                    $consulta = "SELECT * FROM voters a, candidates b where a.id_candidate = b.id_candidate;";        
+                break;
 	}
 
 	//EJECUTA CONSULTA
