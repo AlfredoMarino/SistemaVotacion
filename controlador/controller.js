@@ -277,6 +277,17 @@ function refreshTable(){
 }); 
 function eliminaVoto(rut){
     alert(rut);
+
+    $.ajax({
+        type: "GET",
+        url: "../modelo/action_model.php?a=2&b="+rut,
+        success: function(data) {
+            //refreshTable();
+            alert(data);
+        }
+    });
+     
+            
 }
 function formateCheckbox(value){
     if(value == 't'){
