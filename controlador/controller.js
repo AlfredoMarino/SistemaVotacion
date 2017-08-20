@@ -153,8 +153,9 @@ $(document).ready(function () {
                             url: "../modelo/action_model.php?a=1",
                             data: dataString,
                             success: function(data) {
-                                //refreshTable();
+                                
                                 alert(data);
+                                refreshTable();
                             }
                         });
                     //}
@@ -221,7 +222,37 @@ function validaCombobox(){
     return true;
 }
 
+
+
+
+
+}); 
+
+function formateCheckbox(value){
+    if(value == 't'){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function eliminaVoto(rut){
+    alert(rut);
+
+    $.ajax({
+        type: "GET",
+        url: "../modelo/action_model.php?a=2&b="+rut,
+        success: function(data) {
+            
+            alert(data);
+            refreshTable();
+        }
+    });            
+}
+
 function refreshTable(){
+    $('#tableTotalizacion').empty();
+    $('#listVotos').empty();
     
     //TOTALIZACION
     $.ajax({
@@ -273,30 +304,6 @@ function refreshTable(){
             error: function (msg) { alert(msg); }
     });
 }
-
-}); 
-function eliminaVoto(rut){
-    alert(rut);
-
-    $.ajax({
-        type: "GET",
-        url: "../modelo/action_model.php?a=2&b="+rut,
-        success: function(data) {
-            //refreshTable();
-            alert(data);
-        }
-    });
-     
-            
-}
-function formateCheckbox(value){
-    if(value == 't'){
-        return true;
-    }else{
-        return false;
-    }
-}
-
 
 
 
