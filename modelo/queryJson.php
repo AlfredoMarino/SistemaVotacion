@@ -29,20 +29,11 @@
                     $rut = $_GET['rut'];
                     $consulta = "SELECT * FROM voters where rut = ".$rut.";";
 		break;
-		/*
-		//BUSCA PERSONA
-		case 3:
-			$consulta = "SELECT * FROM personas a, pais b, ciudad c where a.id_pais = b.id_pais and b.id_pais = c.id_pais and a.id_ciudad = c.id_ciudad and rut = ".$_GET['c'].";";
-
-		break;
-
-		case 4:
-			$consulta = "SELECT * FROM personas a, pais b, ciudad c where a.id_pais = b.id_pais and b.id_pais = c.id_pais and a.id_ciudad = c.id_ciudad";
-			break;
-		
-		default:
-			# code...
-		break;*/
+                
+                //Totalizador
+                case 5:
+                    $consulta = "SELECT * FROM totalizador;";        
+                break;
 	}
 
 	//EJECUTA CONSULTA

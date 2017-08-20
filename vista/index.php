@@ -81,7 +81,7 @@
                                 <ul>
                                     
                                     <li type="disc">Totalizado de votos por candidato</li>
-                                    <table id="tableTotalizacion">
+                                    <table id="tableTotalizacion" border="1">
                                         
                                     </table>
                                 </ul>

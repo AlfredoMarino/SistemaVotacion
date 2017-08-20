@@ -2,6 +2,8 @@ var combos = new Object();
 
 $(document).ready(function () {
     
+    refreshTable();
+    
     //carga combo region
     $.ajax({
         url: "../modelo/queryJson.php?qry=1",
@@ -219,7 +221,34 @@ function validaCombobox(){
     return true;
 }
 
-
+function refreshTable(){
+    
+        $.ajax({
+        url: "../modelo/queryJson.php?qry=5",
+        type: "Get",
+        success: function (data) { 
+            try{
+                var content = JSON.parse(data);
+                
+                $('#tableTotalizacion')
+                        .append("<tr><td colspan=2>Total de votaciones</td></tr><tr><td>Nombre candidato</td><td># de votos</td></tr>");
+                
+                fo
+                /*
+                $("#candidate").empty();
+                $("#candidate").append("<option value=0></option>");
+                for (var i = content.length - 1; i >= 0; i--) {
+                    
+                    $("#candidate").append("<option value=" + content[i].id_candidate + ">" + content[i].namecandidate + "</option>");
+                }*/
+            }catch(err){
+                console.log(err);
+            }
+            
+        },
+        error: function (msg) { alert(msg); }
+    });
+}
 
 }); 
 
@@ -230,6 +259,8 @@ function formateCheckbox(value){
         return false;
     }
 }
+
+
 
 
 
