@@ -1,4 +1,7 @@
 var combos = new Object();
+//var votanteCollection = Map();
+//var votante = new Object();
+var votantesJSON = new Object();
 
 $(document).ready(function () {
     
@@ -250,6 +253,14 @@ function eliminaVoto(rut){
     });            
 }
 
+function descargarXML(rut){
+    $.getScript("../controlador/generateXML.js", 
+            function(data) {
+                descargarArchivo(generarXml(votantesJSON, rut), 'votantes.xml');
+            }
+        );
+}
+
 function refreshTable(){
     $('#tableTotalizacion').empty();
     $('#listVotos').empty();
@@ -289,11 +300,24 @@ function refreshTable(){
         success: function (data) { 
             try{
                 var content = JSON.parse(data);
+                votantesJSON = content;
                 var total = 0;
                 
 
                 for (i in content){
-                    $('#listVotos').append("<li type='disc' value='"+content[i].rut+"'>"+content[i].rut+"---"+content[i].name+", "+content[i].namecandidate+", "+content[i].date+" "+content[i].time+" <a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a></li>");
+                    $('#listVotos').append("<li type='disc' value='"+content[i].rut+"'>"+content[i].rut+"---"+content[i].name+", "+content[i].namecandidate+", "+content[i].date+" "+content[i].time+" <a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a>  <a href='#' onclick='descargarXML("+content[i].rut+")';return false; id='enlaceXML'>Descargar XML</a></li>");
+                    
+                    
+                    //tambien pude haberlo usado con coleciones
+                    /*
+                    votante.rut = content[i].rut;
+                    votante.name = content[i].name;
+                    votante.nameCandidate = content[i].namecandidate;
+                    votante.date = content[i].date;
+                    votante.time = content[i].time;
+                    
+                    votanteCollection.set(votante.rut, votante);*/
+                 
                 }
 
             }catch(err){
