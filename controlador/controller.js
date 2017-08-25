@@ -225,10 +225,6 @@ function validaCombobox(){
     return true;
 }
 
-
-
-
-
 }); 
 
 function formateCheckbox(value){
@@ -254,11 +250,46 @@ function eliminaVoto(rut){
 }
 
 function descargarXML(rut){
-    $.getScript("../controlador/generateXML.js", 
-            function(data) {
-                descargarArchivo(generarXml(votantesJSON, rut), 'votantes.xml');
+    
+    var texto = '<?xml version="1.0" encoding="UTF-8" ?>\n';
+    
+    if (rut == 0){
+        for (i in votantesJSON){
+            texto += '<datos>\n';
+            texto += '\t<nombre>';
+            texto += votantesJSON[i].name;
+            texto += '</nombre>\n';
+            texto += '\t<candidato>';
+            texto += votantesJSON[i].namecandidate;
+            texto += '</candidato>\n';
+            texto += '\t<fecha>';
+            texto += votantesJSON[i].date;
+            texto += '</fecha>\n';
+            texto += '</datos>\n';
+
+        }
+    }else{
+        for (i in votantesJSON){
+            if (votantesJSON[i].rut == rut){
+                texto += '<datos>\n';
+                texto += '\t<nombre>';
+                texto += votantesJSON[i].name;
+                texto += '</nombre>\n';
+                texto += '\t<candidato>';
+                texto += votantesJSON[i].namecandidate;
+                texto += '</candidato>\n';
+                texto += '\t<fecha>';
+                texto += votantesJSON[i].date;
+                texto += '</fecha>\n';
+                texto += '</datos>\n';
             }
-        );
+        }
+    }   
+    
+    //FORMA CON JQUERY
+    $('#enlaceXML'+rut).prop('download', 'archivo.xml')
+    $('#enlaceXML'+rut).prop('href', "data:application/octet-stream," + encodeURIComponent(texto));
+    
 }
 
 function refreshTable(){
@@ -305,7 +336,15 @@ function refreshTable(){
                 
 
                 for (i in content){
-                    $('#listVotos').append("<li type='disc' value='"+content[i].rut+"'>"+content[i].rut+"---"+content[i].name+", "+content[i].namecandidate+", "+content[i].date+" "+content[i].time+" <a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a>  <a href='#' onclick='descargarXML("+content[i].rut+")';return false; id='enlaceXML'>Descargar XML</a></li>");
+                    $('#listVotos')
+                            .append("<li type='disc' value='"+content[i].rut+"'>"
+                            +content[i].rut+"---"
+                            +content[i].name+", "
+                            +content[i].namecandidate+", "
+                            +content[i].date+" "
+                            +content[i].time
+                            +"<a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a>  "
+                            +"<a onclick='descargarXML("+content[i].rut+")'; id='enlaceXML"+content[i].rut+"'>Descargar XML</a></li>");
                     
                     
                     //tambien pude haberlo usado con coleciones
