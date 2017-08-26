@@ -96,7 +96,7 @@ $(document).ready(function () {
     
         rut = rut.replace(/\D/g,'');
 
-        alert(rut);
+        //alert(rut);
         $.ajax({
             url: "../modelo/queryJson.php?qry=4&rut="+rut,
             type: "Get",
@@ -144,12 +144,12 @@ $(document).ready(function () {
 
         $.getScript("../controlador/validator.js", 
             function(data) {
-                //if (validaFormulario(rut, name, nickname, email)) {
-                  //  if (validaCombobox() && validaCheckbox()) {
+                if (validaFormulario(rut, name, nickname, email)) {
+                    if (validaCombobox() && validaCheckbox()) {
 
                         var dataString = $('#formulario').serialize();
 
-                        alert('Datos serializados: '+dataString);
+                        //alert('Datos serializados: '+dataString);
 
                         $.ajax({
                             type: "POST",
@@ -157,12 +157,12 @@ $(document).ready(function () {
                             data: dataString,
                             success: function(data) {
                                 
-                                alert(data);
+                                //alert(data);
                                 refreshTable();
                             }
                         });
-                    //}
-                //} 
+                    }
+                } 
             }
         );
     });
@@ -236,14 +236,14 @@ function formateCheckbox(value){
 }
 
 function eliminaVoto(rut){
-    alert(rut);
+    //alert(rut);
 
     $.ajax({
         type: "GET",
         url: "../modelo/action_model.php?a=2&b="+rut,
         success: function(data) {
             
-            alert(data);
+            //alert(data);
             refreshTable();
         }
     });            
@@ -252,7 +252,7 @@ function eliminaVoto(rut){
 function descargarXML(rut){
     
     var texto = '<?xml version="1.0" encoding="UTF-8" ?>\n';
-    
+    //rut = 0;
     if (rut == 0){
         for (i in votantesJSON){
             texto += '<datos>\n';
@@ -265,6 +265,9 @@ function descargarXML(rut){
             texto += '\t<fecha>';
             texto += votantesJSON[i].date;
             texto += '</fecha>\n';
+            texto += '\t<hora>';
+            texto += votantesJSON[i].time;
+            texto += '</hora>\n';
             texto += '</datos>\n';
 
         }
@@ -281,6 +284,9 @@ function descargarXML(rut){
                 texto += '\t<fecha>';
                 texto += votantesJSON[i].date;
                 texto += '</fecha>\n';
+                texto += '\t<hora>';
+                texto += votantesJSON[i].time;
+                texto += '</hora>\n';
                 texto += '</datos>\n';
             }
         }
@@ -338,13 +344,13 @@ function refreshTable(){
                 for (i in content){
                     $('#listVotos')
                             .append("<li type='disc' value='"+content[i].rut+"'>"
-                            +content[i].rut+"---"
-                            +content[i].name+", "
-                            +content[i].namecandidate+", "
-                            +content[i].date+" "
-                            +content[i].time
-                            +"<a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a>  "
-                            +"<a onclick='descargarXML("+content[i].rut+")'; id='enlaceXML"+content[i].rut+"'>Descargar XML</a></li>");
+                                +content[i].rut+"---"
+                                +content[i].name+", "
+                                +content[i].namecandidate+", "
+                                +content[i].date+" "
+                                +content[i].time
+                                +"<a href='#' onclick='eliminaVoto("+content[i].rut+")';return false; id='enlaceEliminar'>Eliminar</a>  "
+                                +"<a href='#' onclick='descargarXML("+content[i].rut+")';return false; id='enlaceXML"+content[i].rut+"'>Descargar XML</a></li>");
                     
                     
                     //tambien pude haberlo usado con coleciones

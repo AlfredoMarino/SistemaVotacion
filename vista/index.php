@@ -40,16 +40,16 @@
 				
 				<form id="formulario" method="POST">
 					<label>Nombre y apellido</label>
-					<input type="text" name="name" id="name" value="Rodrigo"><br>
+					<input type="text" name="name" id="name" value=""><br>
 
 					<label>Alias</label>
-					<input type="text" name="nickname" id="nickname" value="roro"><br>
+					<input type="text" name="nickname" id="nickname" value=""><br>
 
 					<label>RUT</label>
 					<input type="text" name="rut" id="rut"><br>
 
 					<label>Email</label>
-					<input type="text" name="email" id="email" value="ro@hotmail.com"><br>
+					<input type="text" name="email" id="email" value=""><br>
 
 					<label>Región</label>
 					<select name="region" id="region">
