@@ -159,6 +159,7 @@ $(document).ready(function () {
                                 
                                 //alert(data);
                                 refreshTable();
+                                
                             }
                         });
                     }
@@ -252,7 +253,7 @@ function eliminaVoto(rut){
 function descargarXML(rut){
     
     var texto = '<?xml version="1.0" encoding="UTF-8" ?>\n';
-    //rut = 0;
+    //esta opcion no se puede porque el href tiene un limite de caracteres que pasar en la lista
     if (rut == 0){
         for (i in votantesJSON){
             texto += '<datos>\n';
@@ -269,7 +270,7 @@ function descargarXML(rut){
             texto += votantesJSON[i].time;
             texto += '</hora>\n';
             texto += '</datos>\n';
-
+            
         }
     }else{
         for (i in votantesJSON){
