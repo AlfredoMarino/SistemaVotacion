@@ -1,0 +1,13 @@
+-- View: public.totalizador
+
+-- DROP VIEW public.totalizador;
+
+CREATE OR REPLACE VIEW public.totalizador AS 
+ SELECT b.namecandidate,
+    count(a.id_candidate) AS cuenta
+   FROM candidates b
+     LEFT JOIN voters a ON b.id_candidate = a.id_candidate
+  GROUP BY b.namecandidate;
+
+ALTER TABLE public.totalizador
+  OWNER TO postgres;
